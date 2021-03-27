@@ -3835,7 +3835,7 @@ class IlsangDistributionBot(commands.AutoShardedBot):
 				channel = basicSetting[7]
 				message = msg
 
-				for command_str in ["컷", "멍", "예상", "삭제", "메모", "카톡켬", "카톡끔", "]:
+				for command_str in ["컷", "멍", "예상", "삭제", "메모", "카톡켬", "카톡끔", "cut"]:
 					if command_str in message.content:
 						tmp_msg : str = ""
 						for key, value in boss_nick.items():
