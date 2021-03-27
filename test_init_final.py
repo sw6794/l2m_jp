@@ -1,4 +1,4 @@
-﻿# -*- coding: utf-8 -*- 
+# -*- coding: utf-8 -*- 
 
 ################ Server Ver. 27 (2021. 2. 17.) #####################
 
@@ -2458,7 +2458,7 @@ class mainCog(commands.Cog):
 					boss_information[0] = '``` ```'
 
 				embed = discord.Embed(
-						title = "----- 보스탐 정보 -----",
+						title = "----- BOSS TIME  -----",
 						description= boss_information[0],
 						color=0x0000ff
 						)
@@ -2485,7 +2485,7 @@ class mainCog(commands.Cog):
 					tmp_boss_information[0] = '``` ```'
 
 				embed = discord.Embed(
-					title = "----- 미예약 보스 -----",
+					title = "----- Unidentified BOSS -----",
 					description= tmp_boss_information[0],
 					color=0x0000ff
 					)
@@ -3846,7 +3846,7 @@ class IlsangDistributionBot(commands.AutoShardedBot):
 
 				for i in range(bossNum):
 					################ 보스 컷처리 ################ 
-					if message.content.startswith(bossData[i][0] +'컷') or message.content.startswith(bossData[i][0] +'cut') or message.content.startswith(convertToInitialLetters(bossData[i][0] +'컷')) or message.content.startswith(bossData[i][0] +' 컷') or message.content.startswith(convertToInitialLetters(bossData[i][0] +' 컷')):
+					if message.content.startswith(bossData[i][0] +'컷') or message.content.startswith(bossData[i][0] +'cut') or message.content.startswith(convertToInitialLetters(bossData[i][0] +'컷')) or message.content.startswith(convertToInitialLetters(bossData[i][0] +'cut')) or message.content.startswith(bossData[i][0] +' 컷') or message.content.startswith(bossData[i][0] +' cut') or message.content.startswith(convertToInitialLetters(bossData[i][0] +' 컷') or message.content.startswith(convertToInitialLetters(bossData[i][0] +' cut')):
 						if hello.find('  ') != -1 :
 							bossData[i][6] = hello[hello.find('  ')+2:]
 							hello = hello[:hello.find('  ')]
@@ -3903,14 +3903,14 @@ class IlsangDistributionBot(commands.AutoShardedBot):
 							bossFlag0[i] = True
 
 						embed = discord.Embed(
-								description= '```다음 ' + bossData[i][0] + ' ' + bossTimeString[i] + '입니다.```',
+								description= '```NEXT ' + bossData[i][0] + ' ' + bossTimeString[i] + '```',
 								color=0xff0000
 								)
 						await self.get_channel(channel).send(embed=embed, tts=False)
 
 					################ 보스 멍 처리 ################ 
 
-					if message.content.startswith(bossData[i][0] +'멍') or message.content.startswith(bossData[i][0] +' 멍'):
+					if message.content.startswith(bossData[i][0] +'멍') or message.content.startswith(bossData[i][0] +'non') or message.content.startswith(bossData[i][0] +' 멍') or message.content.startswith(bossData[i][0] +' none'):
 						if hello.find('  ') != -1 :
 							bossData[i][6] = hello[hello.find('  ')+2:]
 							hello = hello[:hello.find('  ')]
@@ -3957,7 +3957,7 @@ class IlsangDistributionBot(commands.AutoShardedBot):
 								bossFlag0[i] = True
 
 							embed = discord.Embed(
-									description= '```다음 ' + bossData[i][0] + ' ' + bossTimeString[i] + '입니다.```',
+									description= '```NEXT ' + bossData[i][0] + ' ' + bossTimeString[i] + '```',
 									color=0xff0000
 									)
 							await self.get_channel(channel).send(embed=embed, tts=False)
@@ -3981,7 +3981,7 @@ class IlsangDistributionBot(commands.AutoShardedBot):
 									bossFlag0[i] = True
 
 								embed = discord.Embed(
-										description= '```다음 ' + bossData[i][0] + ' ' + bossTimeString[i] + '입니다.```',
+										description= '```NEXT ' + bossData[i][0] + ' ' + bossTimeString[i] + '```',
 										color=0xff0000
 										)
 								await self.get_channel(channel).send(embed=embed, tts=False)
