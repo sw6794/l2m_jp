@@ -616,21 +616,21 @@ async def dbSave():
 	
 	datelist = list(set(datelist1))
 
-	information1 = '----- 보스탐 정보 -----\n'
+	information1 = '----- BOSS TIME -----\n'
 	for timestring in sorted(datelist):
 		for i in range(bossNum):
 			if timestring == bossTime[i]:
 				if bossTimeString[i] != '99:99:99' or bossMungFlag[i] == True :
 					if bossMungFlag[i] == True :
 						if bossData[i][2] == '0' :
-							information1 += ' - ' + bossData[i][0] + '(' + bossData[i][1] + '.' + bossData[i][5] + ') : ' + tmp_bossTime[i].strftime('%H:%M:%S') + ' @ ' + tmp_bossTime[i].strftime('%Y-%m-%d') + ' (미입력 ' + str(bossMungCnt[i]) + '회)' + ' * ' + bossData[i][6] + '\n'
+							information1 += ' - ' + bossData[i][0] + '(' + bossData[i][1] + '.' + bossData[i][5] + ') : ' + tmp_bossTime[i].strftime('%H:%M:%S') + ' @ ' + tmp_bossTime[i].strftime('%Y-%m-%d') + ' (unidentified ' + str(bossMungCnt[i]) + ')' + ' * ' + bossData[i][6] + '\n'
 						else : 
-							information1 += ' - ' + bossData[i][0] + '(' + bossData[i][1] + '.' + bossData[i][5] + ') : ' + tmp_bossTime[i].strftime('%H:%M:%S') + ' @ ' + tmp_bossTime[i].strftime('%Y-%m-%d') + ' (멍 ' + str(bossMungCnt[i]) + '회)' + ' * ' + bossData[i][6] + '\n'
+							information1 += ' - ' + bossData[i][0] + '(' + bossData[i][1] + '.' + bossData[i][5] + ') : ' + tmp_bossTime[i].strftime('%H:%M:%S') + ' @ ' + tmp_bossTime[i].strftime('%Y-%m-%d') + ' (unidentified ' + str(bossMungCnt[i]) + ')' + ' * ' + bossData[i][6] + '\n'
 					else:
 						if bossData[i][2] == '0' :
-							information1 += ' - ' + bossData[i][0] + '(' + bossData[i][1] + '.' + bossData[i][5] + ') : ' + bossTimeString[i] + ' @ ' + bossDateString[i] + ' (미입력 ' + str(bossMungCnt[i]) + '회)' + ' * ' + bossData[i][6] + '\n'
+							information1 += ' - ' + bossData[i][0] + '(' + bossData[i][1] + '.' + bossData[i][5] + ') : ' + bossTimeString[i] + ' @ ' + bossDateString[i] + ' (unidentified ' + str(bossMungCnt[i]) + ')' + ' * ' + bossData[i][6] + '\n'
 						else : 
-							information1 += ' - ' + bossData[i][0] + '(' + bossData[i][1] + '.' + bossData[i][5] + ') : ' + bossTimeString[i] + ' @ ' + bossDateString[i] + ' (멍 ' + str(bossMungCnt[i]) + '회)' + ' * ' + bossData[i][6] + '\n'
+							information1 += ' - ' + bossData[i][0] + '(' + bossData[i][1] + '.' + bossData[i][5] + ') : ' + bossTimeString[i] + ' @ ' + bossDateString[i] + ' (unidentified ' + str(bossMungCnt[i]) + ')' + ' * ' + bossData[i][6] + '\n'
 						
 	try :
 		contents = repo.get_contents("my_bot.db")
@@ -818,9 +818,9 @@ async def LadderFunc(number, ladderlist, channelVal):
 	lose_member = [item for item in ladderlist if item not in result_ladder]
 	result_ladderSTR = ','.join(map(str, result_ladder))
 	embed = discord.Embed(title  = "🎲 사다리! 묻고 더블로 가!",color=0x00ff00)
-	embed.add_field(name = "👥 참가자", value =  f"```fix\n{', '.join(ladderlist)}```", inline=False)
-	embed.add_field(name = "😍 당첨", value =  f"```fix\n{', '.join(result_ladder)}```")
-	embed.add_field(name = "😭 낙첨", value =  f"```{', '.join(lose_member)}```")
+	embed.add_field(name = "👥 참가자(ntry)", value =  f"```fix\n{', '.join(ladderlist)}```", inline=False)
+	embed.add_field(name = "😍 당첨(Winer)", value =  f"```fix\n{', '.join(result_ladder)}```")
+	embed.add_field(name = "😭 낙첨(Loser)", value =  f"```{', '.join(lose_member)}```")
 	await channelVal.send(embed=embed, tts=False)
 
 #data초기화
@@ -1114,9 +1114,9 @@ class taskCog(commands.Cog):
 							if bossFlag0[i] == False:
 								bossFlag0[i] = True
 								if bossData[i][6] != '' :
-									await self.bot.get_channel(channel).send("```" + bossData[i][0] + ' ' + basicSetting[3] + '분 전 ' + bossData[i][3] + " [" +  bossTimeString[i] + "]" + '\n<' + bossData[i][6] + '>```', tts=False)
+									await self.bot.get_channel(channel).send("```" + bossData[i][0] + ' ' + basicSetting[3] + '분 전 (minute ago) ' + bossData[i][3] + " [" +  bossTimeString[i] + "]" + '\n<' + bossData[i][6] + '>```', tts=False)
 								else :
-									await self.bot.get_channel(channel).send("```" + bossData[i][0] + ' ' + basicSetting[3] + '분 전 ' + bossData[i][3] + " [" +  bossTimeString[i] + "]```", tts=False)
+									await self.bot.get_channel(channel).send("```" + bossData[i][0] + ' ' + basicSetting[3] + '분 전 (minute ago) ' + bossData[i][3] + " [" +  bossTimeString[i] + "]```", tts=False)
 								try:
 									if basicSetting[21] == "1":
 										await PlaySound(self.bot.voice_clients[0], './sound/' + bossData[i][0] + '알림1.mp3')
@@ -1129,9 +1129,9 @@ class taskCog(commands.Cog):
 							if bossFlag[i] == False:
 								bossFlag[i] = True
 								if bossData[i][6] != '' :
-									await self.bot.get_channel(channel).send("```" + bossData[i][0] + ' ' + basicSetting[1] + '분 전 ' + bossData[i][3] + " [" +  bossTimeString[i] + "]" + '\n<' + bossData[i][6] + '>```', tts=False)
+									await self.bot.get_channel(channel).send("```" + bossData[i][0] + ' ' + basicSetting[1] + '분 전 (minute ago) ' + bossData[i][3] + " [" +  bossTimeString[i] + "]" + '\n<' + bossData[i][6] + '>```', tts=False)
 								else :
-									await self.bot.get_channel(channel).send("```" + bossData[i][0] + ' ' + basicSetting[1] + '분 전 ' + bossData[i][3] + " [" +  bossTimeString[i] + "]```", tts=False)
+									await self.bot.get_channel(channel).send("```" + bossData[i][0] + ' ' + basicSetting[1] + '분 전 (minute ago) ' + bossData[i][3] + " [" +  bossTimeString[i] + "]```", tts=False)
 								try:
 									if basicSetting[21] == "1":
 										await PlaySound(self.bot.voice_clients[0], './sound/' + bossData[i][0] + '알림.mp3')
@@ -1202,7 +1202,7 @@ class taskCog(commands.Cog):
 										tmp_bossTime[i] = bossTime[i] = nextTime = tmp_bossTime[i]+datetime.timedelta(hours=int(bossData[i][1]), minutes=int(bossData[i][5]))
 										tmp_bossTimeString[i] = bossTimeString[i] = nextTime.strftime('%H:%M:%S')
 										tmp_bossDateString[i] = bossDateString[i] = nextTime.strftime('%Y-%m-%d')
-										await self.bot.get_channel(channel).send("```" +  bossData[i][0] + ' 미입력 됐습니다.```', tts=False)
+										await self.bot.get_channel(channel).send("```" +  bossData[i][0] + ' 미입력 (unidentified) 됐습니다.```', tts=False)
 										embed = discord.Embed(
 											description= '```다음 ' + bossData[i][0] + ' ' + bossTimeString[i] + '입니다.```',
 											color=0xff0000
@@ -1222,7 +1222,7 @@ class taskCog(commands.Cog):
 										tmp_bossTime[i] = bossTime[i] = nextTime = tmp_bossTime[i]+datetime.timedelta(hours=int(bossData[i][1]), minutes=int(bossData[i][5]))
 										tmp_bossTimeString[i] = bossTimeString[i] = nextTime.strftime('%H:%M:%S')
 										tmp_bossDateString[i] = bossDateString[i] = nextTime.strftime('%Y-%m-%d')
-										await self.bot.get_channel(channel).send("```" + bossData[i][0] + ' 멍 입니다.```')
+										await self.bot.get_channel(channel).send("```" + bossData[i][0] + ' 멍 (unidentified) 입니다.```')
 										embed = discord.Embed(
 											description= '```다음 ' + bossData[i][0] + ' ' + bossTimeString[i] + '입니다.```',
 											color=0xff0000
@@ -1806,7 +1806,7 @@ class mainCog(commands.Cog):
 					tmp_boss_information[0] = '``` ```'
 
 				embed = discord.Embed(
-						title = "----- 미예약 보스 -----",
+						title = "----- Unidentified BOSS -----",
 						description= tmp_boss_information[0],
 						color=0x0000ff
 						)
@@ -1821,7 +1821,7 @@ class mainCog(commands.Cog):
 					tmp_boss_information[0] = '``` ```'
 
 				embed = discord.Embed(
-					title = "----- 미예약 보스 -----",
+					title = "----- Unidentified BOSS -----",
 					description= tmp_boss_information[0],
 					color=0x0000ff
 					)
@@ -1963,9 +1963,9 @@ class mainCog(commands.Cog):
 				color=0x00ff00
 				)
 			embed.description = f"||```{input_data}\n{''.join(ladder_data)}{' '.join(output_list)}```||"
-			embed.add_field(name = "👥 참가자", value =  f"```fix\n{', '.join(join_member)}```", inline=False)
-			embed.add_field(name = "😍 당첨", value =  f"```fix\n{', '.join(win_member)}```")
-			embed.add_field(name = "😭 낙첨", value =  f"```{', '.join(lose_member)}```")
+			embed.add_field(name = "👥 참가자 (Entry)", value =  f"```fix\n{', '.join(join_member)}```", inline=False)
+			embed.add_field(name = "😍 당첨 (Winner)", value =  f"```fix\n{', '.join(win_member)}```")
+			embed.add_field(name = "😭 낙첨 (Loser)", value =  f"```{', '.join(lose_member)}```")
 			return await ctx.send(embed = embed)
 		else:
 			return
@@ -2642,7 +2642,7 @@ class mainCog(commands.Cog):
 				boss_information[0] = '``` ```'
 
 			embed = discord.Embed(
-					title = "----- 보스탐 정보 -----",
+					title = "----- BOSS TIME -----",
 					description= boss_information[0],
 					color=0x0000ff
 					)
@@ -2670,7 +2670,7 @@ class mainCog(commands.Cog):
 				tmp_boss_information[0] = '``` ```'
 
 			embed = discord.Embed(
-				title = "----- 미예약 보스 -----",
+				title = "----- Unidentified BOSS -----",
 				description= tmp_boss_information[0],
 				color=0x0000ff
 				)
@@ -3846,7 +3846,7 @@ class IlsangDistributionBot(commands.AutoShardedBot):
 
 				for i in range(bossNum):
 					################ 보스 컷처리 ################ 
-					if message.content.startswith(bossData[i][0] +'컷') or message.content.startswith(bossData[i][0] +'cut') or message.content.startswith(convertToInitialLetters(bossData[i][0] +'컷')) or message.content.startswith(convertToInitialLetters(bossData[i][0] +'cut')) or message.content.startswith(bossData[i][0] +' 컷') or message.content.startswith(bossData[i][0] +' cut') or message.content.startswith(convertToInitialLetters(bossData[i][0] +' 컷') or message.content.startswith(convertToInitialLetters(bossData[i][0] +' cut')):
+					if message.content.startswith(bossData[i][0] +'컷') or message.content.startswith(bossData[i][0] +'cut') or message.content.startswith(convertToInitialLetters(bossData[i][0] +'컷') or message.content.startswith(convertToInitialLetters(bossData[i][0] +'cut') or message.content.startswith(bossData[i][0] +' 컷') or message.content.startswith(bossData[i][0] +' cut') or message.content.startswith(convertToInitialLetters(bossData[i][0] +' 컷') or message.content.startswith(convertToInitialLetters(bossData[i][0] +' cut')):
 						if hello.find('  ') != -1 :
 							bossData[i][6] = hello[hello.find('  ')+2:]
 							hello = hello[:hello.find('  ')]
