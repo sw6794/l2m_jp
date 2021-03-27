@@ -616,7 +616,7 @@ async def dbSave():
 	
 	datelist = list(set(datelist1))
 
-	information1 = '----- BOSS TIME -----\n'
+	information1 = '----- 보스탐 정보 -----\n'
 	for timestring in sorted(datelist):
 		for i in range(bossNum):
 			if timestring == bossTime[i]:
@@ -1434,8 +1434,8 @@ class mainCog(commands.Cog):
 			command_list += ','.join(command[34]) + ' ※ 관리자만 실행 가능\n\n'     #서버나가기
 			command_list += ','.join(command[22]) + '\n'     #보스탐
 			command_list += ','.join(command[23]) + '\n'     #!보스탐
-			command_list += '[보스명]cut 또는 [보스명]cut 0000, 00:00\n'  
-			command_list += '[보스명] cut 또는 [보스명] cut 0000, 00:00\n'   
+			command_list += '[보스명]컷 또는 [보스명]컷 0000, 00:00\n'  
+			command_list += '[보스명] 컷 또는 [보스명] 컷 0000, 00:00\n'   
 			command_list += '[보스명]멍 또는 [보스명]멍 0000, 00:00\n'     
 			command_list += '[보스명]예상 또는 [보스명]예상 0000, 00:00\n' 
 			command_list += '[보스명]삭제\n'     
@@ -1447,7 +1447,7 @@ class mainCog(commands.Cog):
 					)
 			embed.add_field(
 					name="----- 추가기능 -----",
-					value= '```- [보스명]cut/멍/예상  [할말] : 보스시간 입력 후 빈칸 두번!! 메모 가능\n- [보스명]cut 명령어는 초성으로 입력가능합니다.\n  ex)' + bossData[0][0] + 'cut => ' + convertToInitialLetters(bossData[0][0] +'cut') + ', ' + bossData[0][0] + ' cut => ' + convertToInitialLetters(bossData[0][0] +' cut') + '```'
+					value= '```- [보스명]컷/멍/예상  [할말] : 보스시간 입력 후 빈칸 두번!! 메모 가능\n- [보스명]컷 명령어는 초성으로 입력가능합니다.\n  ex)' + bossData[0][0] + '컷 => ' + convertToInitialLetters(bossData[0][0] +'컷') + ', ' + bossData[0][0] + ' 컷 => ' + convertToInitialLetters(bossData[0][0] +' 컷') + '```'
 					)
 			await ctx.send( embed=embed, tts=False)
 		else:
@@ -1784,7 +1784,7 @@ class mainCog(commands.Cog):
 		else:
 			return
 
-	################ Unidentified BOSS타임 출력 ################ 
+	################ 미예약 보스타임 출력 ################ 
 	@commands.command(name=command[10][0], aliases=command[10][1:])
 	async def nocheckBoss_(self, ctx):
 		if ctx.message.channel.id == basicSetting[7]:
@@ -1806,7 +1806,7 @@ class mainCog(commands.Cog):
 					tmp_boss_information[0] = '``` ```'
 
 				embed = discord.Embed(
-						title = "----- Unidentified BOSS -----",
+						title = "----- 미예약 보스 -----",
 						description= tmp_boss_information[0],
 						color=0x0000ff
 						)
@@ -1821,7 +1821,7 @@ class mainCog(commands.Cog):
 					tmp_boss_information[0] = '``` ```'
 
 				embed = discord.Embed(
-					title = "----- Unidentified BOSS -----",
+					title = "----- 미예약 보스 -----",
 					description= tmp_boss_information[0],
 					color=0x0000ff
 					)
@@ -2440,12 +2440,12 @@ class mainCog(commands.Cog):
 					tmp_boss_information[0] = '``` ```'
 
 				embed = discord.Embed(
-						title = "----- BOSS TIME -----",
+						title = "----- 보스탐 정보 -----",
 						description= boss_information[0],
 						color=0x0000ff
 						)
 				embed.add_field(
-						name="----- Unidentified BOSS -----",
+						name="----- 미예약 보스 -----",
 						value= tmp_boss_information[0],
 						inline = False
 						)				
@@ -2458,7 +2458,7 @@ class mainCog(commands.Cog):
 					boss_information[0] = '``` ```'
 
 				embed = discord.Embed(
-						title = "----- BOSS TIME -----",
+						title = "----- 보스탐 정보 -----",
 						description= boss_information[0],
 						color=0x0000ff
 						)
@@ -2485,7 +2485,7 @@ class mainCog(commands.Cog):
 					tmp_boss_information[0] = '``` ```'
 
 				embed = discord.Embed(
-					title = "----- Unidentified BOSS -----",
+					title = "----- 미예약 보스 -----",
 					description= tmp_boss_information[0],
 					color=0x0000ff
 					)
@@ -2642,7 +2642,7 @@ class mainCog(commands.Cog):
 				boss_information[0] = '``` ```'
 
 			embed = discord.Embed(
-					title = "----- BOSS TIME -----",
+					title = "----- 보스탐 정보 -----",
 					description= boss_information[0],
 					color=0x0000ff
 					)
@@ -2670,7 +2670,7 @@ class mainCog(commands.Cog):
 				tmp_boss_information[0] = '``` ```'
 
 			embed = discord.Embed(
-				title = "----- Unidentified BOSS -----",
+				title = "----- 미예약 보스 -----",
 				description= tmp_boss_information[0],
 				color=0x0000ff
 				)
@@ -3835,7 +3835,7 @@ class IlsangDistributionBot(commands.AutoShardedBot):
 				channel = basicSetting[7]
 				message = msg
 
-				for command_str in ["cut", "멍", "예상", "삭제", "메모", "카톡켬", "카톡끔"]:
+				for command_str in ["컷", "멍", "예상", "삭제", "메모", "카톡켬", "카톡끔"]:
 					if command_str in message.content:
 						tmp_msg : str = ""
 						for key, value in boss_nick.items():
@@ -3845,8 +3845,8 @@ class IlsangDistributionBot(commands.AutoShardedBot):
 				hello = message.content
 
 				for i in range(bossNum):
-					################ 보스 cut처리 ################ 
-					if message.content.startswith(bossData[i][0] +'cut') or message.content.startswith(convertToInitialLetters(bossData[i][0] +'cut')) or message.content.startswith(bossData[i][0] +' cut') or message.content.startswith(convertToInitialLetters(bossData[i][0] +' cut')):
+					################ 보스 컷처리 ################ 
+					if message.content.startswith(bossData[i][0] +'컷') or message.content.startswith(convertToInitialLetters(bossData[i][0] +'컷')) or message.content.startswith(bossData[i][0] +' 컷') or message.content.startswith(convertToInitialLetters(bossData[i][0] +' 컷')):
 						if hello.find('  ') != -1 :
 							bossData[i][6] = hello[hello.find('  ')+2:]
 							hello = hello[:hello.find('  ')]
@@ -3854,7 +3854,7 @@ class IlsangDistributionBot(commands.AutoShardedBot):
 							bossData[i][6] = ''
 
 						curr_now = datetime.datetime.now() + datetime.timedelta(hours = int(basicSetting[0]))
-						tmp_msg = bossData[i][0] +'cut'
+						tmp_msg = bossData[i][0] +'컷'
 						if len(hello) > len(tmp_msg) + 3 :
 							if hello.find(':') != -1 :
 								chkpos = hello.find(':')
@@ -3910,14 +3910,14 @@ class IlsangDistributionBot(commands.AutoShardedBot):
 
 					################ 보스 멍 처리 ################ 
 
-					if message.content.startswith(bossData[i][0] +'멍 (unidentified)') or message.content.startswith(bossData[i][0] +' 멍 (unidentified)'):
+					if message.content.startswith(bossData[i][0] +'멍') or message.content.startswith(bossData[i][0] +' 멍'):
 						if hello.find('  ') != -1 :
 							bossData[i][6] = hello[hello.find('  ')+2:]
 							hello = hello[:hello.find('  ')]
 						else:
 							bossData[i][6] = ''
 							
-						tmp_msg = bossData[i][0] +'멍 (unidentified)'
+						tmp_msg = bossData[i][0] +'멍'
 						tmp_now = datetime.datetime.now() + datetime.timedelta(hours = int(basicSetting[0]))
 
 						if len(hello) > len(tmp_msg) + 3 :
