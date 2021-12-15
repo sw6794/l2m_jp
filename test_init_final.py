@@ -529,14 +529,14 @@ def init():
 		f = []
 
 	regenembed = discord.Embed(
-			title='----- BOSS RESPAWN TIME -----',
+			title='----- ボス別リスポーン時間 -----',
 			description= ' ')
 	for i in range(len(regenTime)):
 		if outputTimeMin[i] == 0 :
 			regenembed.add_field(name=str(outputTimeHour[i]) + 'H', value= '```'+ ', '.join(map(str, sorted(regenbossName[i]))) + '```', inline=False)
 		else :
 			regenembed.add_field(name=str(outputTimeHour[i]) + 'H' + str(outputTimeMin[i]) + 'M', value= '```' + ','.join(map(str, sorted(regenbossName[i]))) + '```', inline=False)
-	regenembed.set_footer(text = 'R : NORESPAWN')
+	regenembed.set_footer(text = 'R : 確率ボス (멍 보스)')
 
 	##########################################################
 
@@ -817,10 +817,10 @@ async def LadderFunc(number, ladderlist, channelVal):
 	result_ladder = random.sample(ladderlist, number)
 	lose_member = [item for item in ladderlist if item not in result_ladder]
 	result_ladderSTR = ','.join(map(str, result_ladder))
-	embed = discord.Embed(title  = "🎲 RAND!!",color=0x00ff00)
-	embed.add_field(name = "👥 ENTRY", value =  f"```fix\n{', '.join(ladderlist)}```", inline=False)
-	embed.add_field(name = "😍 WINNER", value =  f"```fix\n{', '.join(result_ladder)}```")
-	embed.add_field(name = "😭 FAILED", value =  f"```{', '.join(lose_member)}```")
+	embed = discord.Embed(title  = "🎲 ランダム 랜덤!",color=0x00ff00)
+	embed.add_field(name = "👥 参加者 참여자", value =  f"```fix\n{', '.join(ladderlist)}```", inline=False)
+	embed.add_field(name = "😍 当籤者 당첨자", value =  f"```fix\n{', '.join(result_ladder)}```")
+	embed.add_field(name = "😭 失敗 실패", value =  f"```{', '.join(lose_member)}```")
 	await channelVal.send(embed=embed, tts=False)
 
 #data초기화
@@ -976,11 +976,11 @@ class taskCog(commands.Cog):
 					try:
 						await self.bot.get_channel(basicSetting[6]).connect(reconnect=True, timeout=5)
 						if self.bot.voice_clients[0].is_connected() :
-							await self.bot.get_channel(channel).send( '< 다시 왔습니다! >', tts=False)
+							await self.bot.get_channel(channel).send( '< また来ました！ 다시 왔습니다! >', tts=False)
 							self.checker = True
 							print("명치복구완료!")
 					except:
-						await self.bot.get_channel(channel).send( '< 음성채널 접속 에러! >', tts=False)
+						await self.bot.get_channel(channel).send( '< VC接続エラー! 음성채널 접속 에러! >', tts=False)
 						self.checker = False
 						print("명치복구실패!")
 						pass
@@ -991,7 +991,7 @@ class taskCog(commands.Cog):
 			if log_stream.getvalue().find("Awaiting") != -1:
 				log_stream.truncate(0)
 				log_stream.seek(0)
-				await self.bot.get_channel(channel).send( '< 디코접속에러! 잠깐 나갔다 올께요! >', tts=False)
+				await self.bot.get_channel(channel).send( '< 接続エラ-! ちょっと出かけてきます! 디코접속에러! 잠깐 나갔다 올께요! >', tts=False)
 				await dbSave()
 				break
 
@@ -1185,11 +1185,11 @@ class taskCog(commands.Cog):
 									bossMungFlag[i] = False
 									bossMungCnt[i] = 0
 									if bossData[i][2] == '0':
-										await self.bot.get_channel(channel).send(f'```AUTO NONE CHECKED COUNT : {basicSetting[17]} OVER! [{bossData[i][0]}] 삭제!```', tts=False)
-										print ('AUTO NONE CHECKED COUNT OVER! <' + bossData[i][0] + ' Deleted>')
+										await self.bot.get_channel(channel).send(f'```自動未入力回数 {basicSetting[17]}回 超過! [{bossData[i][0]}] 削除！```', tts=False)
+										print ('自動未入力回数超過 削除完了 자동미입력횟수초과 삭제완료 <' + bossData[i][0] + '>')
 									else:
-										await self.bot.get_channel(channel).send(f'```AUTO NONE CHECKED COUNT : {basicSetting[17]} OVER! [{bossData[i][0]}] 삭제!```', tts=False)
-										print ('AUTO NONE CHECKED COUNT OVER! <' + bossData[i][0] + ' Deleted>')
+										await self.bot.get_channel(channel).send(f'```自動沸き無し回数 {basicSetting[17]}回 超過! [{bossData[i][0]}] 削除！```', tts=False)
+										print ('自動沸き無し回数 削除完了 자동멍처리횟수초과 삭제완료 <' + bossData[i][0] + '>')
 									#await dbSave()
 
 								else:
@@ -1202,7 +1202,7 @@ class taskCog(commands.Cog):
 										tmp_bossTime[i] = bossTime[i] = nextTime = tmp_bossTime[i]+datetime.timedelta(hours=int(bossData[i][1]), minutes=int(bossData[i][5]))
 										tmp_bossTimeString[i] = bossTimeString[i] = nextTime.strftime('%H:%M:%S')
 										tmp_bossDateString[i] = bossDateString[i] = nextTime.strftime('%Y-%m-%d')
-										await self.bot.get_channel(channel).send("```" +  bossData[i][0] + ' NONE CHECKED.```', tts=False)
+										await self.bot.get_channel(channel).send("```" +  bossData[i][0] + '未入力です。(미입력입니다.)```', tts=False)
 										embed = discord.Embed(
 											description= '```NEXT TIME : ' + bossData[i][0] + ' ' + bossTimeString[i] + '.```',
 											color=0xff0000
@@ -1222,7 +1222,7 @@ class taskCog(commands.Cog):
 										tmp_bossTime[i] = bossTime[i] = nextTime = tmp_bossTime[i]+datetime.timedelta(hours=int(bossData[i][1]), minutes=int(bossData[i][5]))
 										tmp_bossTimeString[i] = bossTimeString[i] = nextTime.strftime('%H:%M:%S')
 										tmp_bossDateString[i] = bossDateString[i] = nextTime.strftime('%Y-%m-%d')
-										await self.bot.get_channel(channel).send("```" + bossData[i][0] + ' NORESPAWN.```')
+										await self.bot.get_channel(channel).send("```" + bossData[i][0] + ' 沸き無し. (멍)```')
 										embed = discord.Embed(
 											description= '```NEXT TIME : ' + bossData[i][0] + ' ' + bossTimeString[i] + '```',
 											color=0xff0000
@@ -1434,12 +1434,12 @@ class mainCog(commands.Cog):
 			command_list += ','.join(command[34]) + ' ※ 관리자만 실행 가능\n\n'     #서버나가기
 			command_list += ','.join(command[22]) + '[BOSS TIME CHECK]\n'     #보스탐
 			command_list += ','.join(command[23]) + '[BOSS TIME CHECK]\n'     #!보스탐
-			command_list += '[BOSSNAME]cut or [BOSSNAME]cut 0000, 00:00 (BOSS CUT)\n'
-			command_list += '[BOSSNAME] cut or [BOSSNAME] cut 0000, 00:00 (BOSS CUT)\n'
-			command_list += '[BOSSNAME]nor or [BOSSNAME]nor 0000, 00:00 (BOSS NORESPAWN)\n'
-			command_list += '[BOSSNAME]set 또는 [BOSSNAME]set 0000, 00:00 (BOSSTIME SET)\n'
-			command_list += '[BOSSNAME]del (BOSSTIME DEL)\n'
-			command_list += '[BOSSNAME]memo [text] (BOSS MEMO)\n'
+			command_list += '[ボス名]cut or [ボス名]cut 0000, 00:00 (ボス CUT)(보스 컷)\n'
+			command_list += '[ボス名] cut or [ボス名] cut 0000, 00:00 (ボス CUT)(보스 컷)\n'
+			command_list += '[ボス名]nor or [ボス名]nor 0000, 00:00 (ボス 沸き無し)(보스 멍)\n'
+			command_list += '[ボス名]set 또는 [ボス名]set 0000, 00:00 (ボス時間設定)(보스시간설정)\n'
+			command_list += '[ボス名]del (ボス時間削除)(보스시간삭제)\n'
+			command_list += '[ボス名]memo [残したい言葉] (ボスメモ)(보스메모)\n'
 			embed = discord.Embed(
 					title = "----- 명령어 -----",
 					description= '```' + command_list + '```',
@@ -1806,7 +1806,7 @@ class mainCog(commands.Cog):
 					tmp_boss_information[0] = '``` ```'
 
 				embed = discord.Embed(
-						title = "----- NONE CHECK BOSS -----",
+						title = "----- 未確認ボス 미예약 보스 -----",
 						description= tmp_boss_information[0],
 						color=0x0000ff
 						)
@@ -1821,7 +1821,7 @@ class mainCog(commands.Cog):
 					tmp_boss_information[0] = '``` ```'
 
 				embed = discord.Embed(
-					title = "----- NONE CHECK BOSS -----",
+					title = "----- 未確認ボス -----",
 					description= tmp_boss_information[0],
 					color=0x0000ff
 					)
@@ -2066,8 +2066,8 @@ class mainCog(commands.Cog):
 			await dbLoad()
 			await dbSave()
 
-			await ctx.send('<보스 일괄 입력 완료>', tts=False)
-			print ("<보스 일괄 입력 완료>")
+			await ctx.send('<ボス一括入力完了 보스 일괄 입력 완료>', tts=False)
+			print ("<ボス一括入力完了 보스 일괄 입력 완료>")
 		else:
 			return
 
@@ -2143,8 +2143,8 @@ class mainCog(commands.Cog):
 			await dbLoad()
 			await dbSave()
 
-			await ctx.send('<멍보스 일괄 입력 완료>', tts=False)
-			print ("<멍보스 일괄 입력 완료>")
+			await ctx.send('<確率ボス一括入力完了 멍보스 일괄 입력 완료>', tts=False)
+			print ("<確率ボス一括入力完了 멍보스 일괄 입력 완료>")
 		else:
 			return
 
@@ -2439,12 +2439,12 @@ class mainCog(commands.Cog):
 					tmp_boss_information[0] = '``` ```'
 
 				embed = discord.Embed(
-						title = "----- BOSS TIME -----",
+						title = "----- ボス予定リスト (보스 시간)-----",
 						description= boss_information[0],
 						color=0x0000ff
 						)
 				embed.add_field(
-						name="----- NONE CHECK BOSS -----",
+						name="----- 未入力ボス (미입력 보스)-----",
 						value= tmp_boss_information[0],
 						inline = False
 						)
@@ -2457,7 +2457,7 @@ class mainCog(commands.Cog):
 					boss_information[0] = '``` ```'
 
 				embed = discord.Embed(
-						title = "----- BOSSTIME -----",
+						title = "----- ボス予定リスト (보스 시간) -----",
 						description= boss_information[0],
 						color=0x0000ff
 						)
@@ -2484,7 +2484,7 @@ class mainCog(commands.Cog):
 					tmp_boss_information[0] = '``` ```'
 
 				embed = discord.Embed(
-					title = "----- NONE CHECK BOSS -----",
+					title = "----- 未入力ボス (미입력 보스) -----",
 					description= tmp_boss_information[0],
 					color=0x0000ff
 					)
@@ -2641,7 +2641,7 @@ class mainCog(commands.Cog):
 				boss_information[0] = '``` ```'
 
 			embed = discord.Embed(
-					title = "----- BOSS TIME -----",
+					title = "----- ボス予定リスト (보스 시간) -----",
 					description= boss_information[0],
 					color=0x0000ff
 					)
@@ -2669,7 +2669,7 @@ class mainCog(commands.Cog):
 				tmp_boss_information[0] = '``` ```'
 
 			embed = discord.Embed(
-				title = "----- None checked BOSS -----",
+				title = "----- 未入力ボス (미입력 보스) -----",
 				description= tmp_boss_information[0],
 				color=0x0000ff
 				)
